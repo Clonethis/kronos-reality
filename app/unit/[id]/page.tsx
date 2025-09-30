@@ -5,8 +5,9 @@ import { PropertyDetails } from "@/components/property-details"
 import { FloorPlan } from "@/components/floor-plan"
 import { getUnitData } from "@/lib/units-data"
 
-export default function PropertyPage({ params }: { params: { id: string } }) {
-  const unit = getUnitData(params.id)
+export default async function PropertyPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const unit = getUnitData(id)
 
   if (!unit) {
     notFound()
